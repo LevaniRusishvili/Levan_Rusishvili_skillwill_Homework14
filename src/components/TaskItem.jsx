@@ -1,13 +1,12 @@
 const TaskItem = ({ task, onMove, onDelete, buttonLabel, showDelete }) => {
+  let borderClass = "";
+  if (buttonLabel === "Start") borderClass = "border-red";
+  else if (buttonLabel === "Complete") borderClass = "border-yellow";
+  else if (buttonLabel === "Restart") borderClass = "border-green";
+
   return (
     <div className="task-wrapper">
-      <li
-        className={`task-item ${
-          buttonLabel === "Confirm" ? "not-done" : "done-task"
-        }`}
-      >
-        {task.name}
-      </li>
+      <li className={`task-item ${borderClass}`}>{task.name}</li>
       <div className="btn-group">
         <button className="btn btn-move" onClick={() => onMove(task.id)}>
           {buttonLabel}
@@ -21,5 +20,4 @@ const TaskItem = ({ task, onMove, onDelete, buttonLabel, showDelete }) => {
     </div>
   );
 };
-
 export default TaskItem;

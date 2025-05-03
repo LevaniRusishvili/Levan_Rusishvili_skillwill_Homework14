@@ -1,223 +1,451 @@
-/* Base styling */
-:root {
-  --bg: #f7f9fc;
-  --text: #333;
-  --card-bg: #ffffff;
-  --todo-color: #ff6b6b;
-  --done-color: #1dd1a1;
-  --accent: #6c63ff;
-}
-
 body {
-  font-family: sans-serif;
-  background: var(--bg);
-  color: var(--text);
   margin: 0;
   padding: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  background-color: #f3f4f6; /* light gray background */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 40px 20px;
+  transition: background-color 0.3s ease;
 }
 
 .todo-container {
-  max-width: 1000px;
-  margin: 40px auto;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-}
-
-/* Input section */
-.input-section {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.input-section input {
-  width: 60%;
-  padding: 12px 16px;
-  font-size: 16px;
-  border: 2px solid #d0d0d0;
-  border-radius: 8px;
-  outline: none;
-  transition: 0.3s;
-}
-
-.input-section input:focus {
-  border-color: var(--accent);
-}
-
-/* Two columns layout */
-.columns {
+  background-color: #fff;
+  max-width: 2200px; /* roughly twice wider */
+  width: 100%;
+  padding: 40px 48px;
   display: flex;
   gap: 40px;
-  justify-content: space-between;
-}
-
-.column {
-  flex: 1;
-  background: var(--card-bg);
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-/* Headings */
-.heading {
-  font-size: 22px;
-  margin-bottom: 20px;
-  font-weight: bold;
-}
-
-.heading-todo {
-  color: var(--todo-color);
-}
-
-.heading-done {
-  color: var(--done-color);
-}
-
-/* Task list */
-.task-list {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.task-item {
-  padding: 12px 16px;
-  margin-bottom: 12px;
   border-radius: 8px;
-  background: #f1f1f1;
-  cursor: pointer;
-  transition: transform 0.2s ease, background 0.3s;
-  font-size: 16px;
-}
-
-.task-item:hover {
-  background: #e0e0e0;
-  transform: translateX(5px);
-}
-
-/* Custom styles for to-do and done tasks */
-.task-item.not-done {
-  border-left: 6px solid var(--todo-color);
-}
-
-.task-item.done-task {
-  border-left: 6px solid var(--done-color);
-  opacity: 0.7;
-}
-
-/* Task wrapper for layout */
-.task-wrapper {
-  display: flex;
+  box-shadow: 0 0 30px rgb(0 0 0 / 0.12);
+  flex-wrap: nowrap;
   flex-direction: column;
-  margin-bottom: 16px;
+  transition: background-color 0.3s ease;
 }
 
-/* Grouped buttons */
-.btn-group {
-  display: flex;
-  gap: 10px;
-  margin-top: 6px;
-}
-
-/* Base button styles */
-.btn {
-  background-color: var(--accent);
-  padding: 8px 12px;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
-  color: white;
-  width: fit-content;
-  margin-top: 8px;
-}
-
-/* Button hover effect */
-.btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Confirm button (for To Do) */
-.btn-confirm {
-  background-color: var(--done-color);
-}
-
-.btn-confirm:hover {
-  background-color: #10ac84;
-}
-
-/* Return to To-Do List button */
-.btn-return {
-  background-color: #54a0ff;
-}
-
-.btn-return:hover {
-  background-color: #2e86de;
-}
-
-/* Delete button */
-.btn-delete {
-  background-color: var(--todo-color);
-}
-
-.btn-delete:hover {
-  background-color: #ee5253;
-}
-
-/* Dark Mode overrides */
+/* Dark mode container background */
 body.dark-mode {
-  --bg: #1e1e1e;
-  --text: #f1f1f1;
-  --card-bg: #2a2a2a;
-  --todo-color: #ff9e9e;
-  --done-color: #48e1c1;
-  --accent: #a18bff;
+  background-color: #1a1a1a;
 }
 
+body.dark-mode .todo-container {
+  background-color: #2a2a2a;
+}
+
+/* Dark mode text color */
+body.dark-mode,
+body.dark-mode .task-item {
+  color: #f1f1f1;
+}
+
+/* Dark mode input background */
 body.dark-mode .input-section input {
   background-color: #444;
   color: #fff;
   border-color: #888;
 }
 
+/* Dark mode task background */
 body.dark-mode .task-item {
-  background: #333;
-  color: #fff;
+  background-color: #333;
 }
 
+/* Dark mode task hover */
 body.dark-mode .task-item:hover {
-  background: #444;
+  background-color: #444;
 }
 
-body.dark-mode .task-item.not-done {
-  border-left: 6px solid #ff9e9e;
+/* Dark mode border colors for tasks */
+body.dark-mode .column:nth-child(1) .task-item:nth-child(1) {
+  border-color: #7fb8ff;
 }
 
-body.dark-mode .task-item.done-task {
-  border-left: 6px solid #48e1c1;
-  opacity: 0.7;
+body.dark-mode .column:nth-child(1) .task-item:nth-child(2) {
+  border-color: #ff7a5a;
 }
 
+body.dark-mode .column:nth-child(2) .task-item:nth-child(1) {
+  border-color: #ff7a5a;
+}
+
+body.dark-mode .column:nth-child(2) .task-item:nth-child(2) {
+  border-color: #f0e86a;
+}
+
+body.dark-mode .column:nth-child(2) .task-item:nth-child(3) {
+  border-color: #7fb8ff;
+}
+
+body.dark-mode .column:nth-child(3) .task-item:nth-child(1) {
+  border-color: #a6d36a;
+}
+
+body.dark-mode .column:nth-child(3) .task-item:nth-child(2) {
+  border-color: #7fb8ff;
+}
+
+/* Dark mode button colors */
+body.dark-mode .btn-theme {
+  background-color: #6c63ff;
+  color: white;
+  border: none;
+}
+
+body.dark-mode .btn-theme:hover {
+  background-color: #574fd6;
+}
+
+/* Dark mode buttons */
 body.dark-mode .btn {
-  background-color: var(--accent);
-  color: #fff;
+  background-color: #6c63ff;
+  color: white;
 }
 
-body.dark-mode .btn-confirm {
-  background-color: var(--done-color);
+/* Dark mode button hover */
+body.dark-mode .btn:hover {
+  background-color: #574fd6;
 }
 
-body.dark-mode .btn-return {
-  background-color: #1e90ff;
-}
-
+/* Dark mode delete button */
 body.dark-mode .btn-delete {
   background-color: #ff5c5c;
+}
+
+body.dark-mode .btn-delete:hover {
+  background-color: #e04e4e;
+}
+
+/* Dark mode confirm button */
+body.dark-mode .btn-confirm {
+  background-color: #48e1c1;
+}
+
+body.dark-mode .btn-confirm:hover {
+  background-color: #36bfa6;
+}
+
+/* Dark mode return button */
+body.dark-mode .btn-return {
+  background-color: #54a0ff;
+}
+
+body.dark-mode .btn-return:hover {
+  background-color: #2e86de;
+}
+
+/* Dark mode input section */
+body.dark-mode .input-section input {
+  background-color: #444;
+  color: #fff;
+  border-color: #888;
+}
+
+/* Dark mode input section button */
+body.dark-mode .input-section button {
+  background-color: #6c63ff;
+  color: white;
+  border: none;
+}
+
+body.dark-mode .input-section button:hover {
+  background-color: #574fd6;
+}
+
+/* Dark mode text colors */
+body.dark-mode .column > h2 {
+  color: #ddd;
+}
+
+/* Dark mode plus button */
+body.dark-mode .add-task {
+  color: #bbb;
+}
+
+body.dark-mode .add-task:hover {
+  color: #eee;
+}
+
+/* Dark mode task list margin */
+body.dark-mode .task-list {
+  margin-left: 8px;
+}
+
+/* Show dark mode toggle button and input section */
+.btn-theme {
+  display: inline-block;
+  margin-bottom: 24px;
+  padding: 6px 14px;
+  font-weight: 600;
+  font-size: 13px;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #6c63ff;
+  color: white;
+  border: none;
+  align-self: center;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 6px rgb(108 99 255 / 0.5);
+}
+
+.btn-theme:hover {
+  background-color: #574fd6;
+  box-shadow: 0 4px 12px rgb(87 79 214 / 0.7);
+}
+
+.input-section {
+  width: 100%;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.input-section input {
+  width: 60%;
+  padding: 10px 14px;
+  font-size: 14px;
+  border: 1.5px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+}
+
+.input-section input:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 8px #6c63ffaa;
+}
+
+.input-section button {
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 6px;
+  border: none;
+  background-color: #6c63ff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 6px rgb(108 99 255 / 0.5);
+}
+
+.input-section button:hover {
+  background-color: #574fd6;
+  box-shadow: 0 4px 12px rgb(87 79 214 / 0.7);
+}
+
+/* Columns container */
+.columns {
+  display: flex;
+  gap: 40px;
+  width: 100%;
+  flex-wrap: nowrap;
+  flex-grow: 1;
+  /* Remove fixed height */
+}
+
+/* Each column */
+.column {
+  flex: 1;
+  background-color: #fff;
+  padding: 0;
+  border-radius: 6px;
+  box-shadow: 0 0 30px rgb(0 0 0 / 0.08);
+  transition: background-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  /* Remove min-height to allow auto height */
+}
+
+/* Column header */
+.column > h2 {
+  font-weight: 400;
+  font-size: 13px;
+  color: #222;
+  margin: 0 0 8px 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+}
+
+/* Number next to title */
+.column > h2 span {
+  font-weight: 400;
+}
+
+/* Underline below header with color */
+.column:nth-child(1) hr {
+  border-top: 1.5px solid #b87f6f;
+  margin: 0 0 16px 8px;
+  width: calc(100% - 16px);
+}
+
+.column:nth-child(2) hr {
+  border-top: 1.5px solid #e2d25a;
+  margin: 0 0 16px 8px;
+  width: calc(100% - 16px);
+}
+
+.column:nth-child(3) hr {
+  border-top: 1.5px solid #8bc34a;
+  margin: 0 0 16px 8px;
+  width: calc(100% - 16px);
+}
+
+/* Task list container */
+.task-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0 0 0 8px;
+  flex-grow: 0; /* don't force grow */
+  overflow: visible; /* show all tasks */
+}
+
+/* Each task item */
+.task-item {
+  font-size: 11px;
+  color: #222;
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  background-color: #fff;
+  border-style: solid;
+  border-width: 1px;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  cursor: default;
+  user-select: none;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Border colors for tasks by column and order */
+.column:nth-child(1) .task-item:nth-child(1) {
+  border-color: #3a8ccf;
+}
+
+.column:nth-child(1) .task-item:nth-child(2) {
+  border-color: #e25a3a;
+}
+
+.column:nth-child(2) .task-item:nth-child(1) {
+  border-color: #e25a3a;
+}
+
+.column:nth-child(2) .task-item:nth-child(2) {
+  border-color: #e2d25a;
+}
+
+.column:nth-child(2) .task-item:nth-child(3) {
+  border-color: #3a8ccf;
+}
+
+.column:nth-child(3) .task-item:nth-child(1) {
+  border-color: #8bc34a;
+}
+
+.column:nth-child(3) .task-item:nth-child(2) {
+  border-color: #3a8ccf;
+}
+
+/* Plus button below tasks */
+.add-task {
+  font-size: 11px;
+  color: #999;
+  background: transparent;
+  border: none;
+  margin-left: 8px;
+  cursor: pointer;
+  user-select: none;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.3s ease;
+}
+
+.add-task:hover {
+  color: #666;
+}
+
+/* Buttons inside task items */
+.btn {
+  padding: 6px 12px;
+  font-size: 12px;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 6px rgb(108 99 255 / 0.4);
+  background-color: #6c63ff;
+  color: white;
+}
+
+.btn:hover {
+  background-color: #574fd6;
+  box-shadow: 0 4px 12px rgb(87 79 214 / 0.7);
+}
+
+.btn-delete {
+  background-color: #ff6b6b;
+  box-shadow: 0 2px 6px rgb(255 107 107 / 0.5);
+  margin-left: 8px;
+}
+
+.btn-delete:hover {
+  background-color: #e04e4e;
+  box-shadow: 0 4px 12px rgb(224 78 78 / 0.7);
+}
+
+.btn-confirm {
+  background-color: #48e1c1;
+  box-shadow: 0 2px 6px rgb(72 225 193 / 0.5);
+}
+
+.btn-confirm:hover {
+  background-color: #36bfa6;
+  box-shadow: 0 4px 12px rgb(54 191 166 / 0.7);
+}
+
+.btn-return {
+  background-color: #54a0ff;
+  box-shadow: 0 2px 6px rgb(84 160 255 / 0.5);
+}
+
+.btn-return:hover {
+  background-color: #2e86de;
+  box-shadow: 0 4px 12px rgb(46 134 222 / 0.7);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .todo-container {
+    flex-direction: column;
+    padding: 24px 20px;
+    max-width: 100%;
+  }
+  .columns {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .column {
+    width: 100%;
+  }
+  .column > h2 {
+    margin-left: 0;
+  }
+  .column hr {
+    margin-left: 0;
+    width: 100%;
+  }
+  .task-list {
+    margin-left: 0;
+  }
+  .add-task {
+    margin-left: 0;
+  }
 }

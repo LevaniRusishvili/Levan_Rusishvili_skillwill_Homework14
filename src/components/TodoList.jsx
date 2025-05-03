@@ -11,6 +11,8 @@ const TodoList = () => {
     { id: 3, name: "Read a book" },
     { id: 4, name: "Finish homework" },
   ]);
+
+  const [inProgress, setInProgress] = useState([]);
   const [input, setInput] = useState("");
   const [nextId, setNextId] = useState(5);
   const [darkMode, setDarkMode] = useState(false);
@@ -43,8 +45,13 @@ const TodoList = () => {
       const task = tasksToDo.find((t) => t.id === id);
       if (!task) return;
       setTasksToDo(tasksToDo.filter((t) => t.id !== id));
+      setInProgress([...inProgress, task]);
+    } else if (fromList === "inProgress") {
+      const task = inProgress.find((t) => t.id === id);
+      if (!task) return;
+      setInProgress(inProgress.filter((t) => t.id !== id));
       setTasksDone([...tasksDone, task]);
-    } else {
+    } else if (fromList === "tasksDone") {
       const task = tasksDone.find((t) => t.id === id);
       if (!task) return;
       setTasksDone(tasksDone.filter((t) => t.id !== id));
@@ -74,6 +81,12 @@ const TodoList = () => {
           tasks={tasksToDo}
           onMove={(id) => handleMoveTask("tasksToDo", id)}
           buttonLabel="Confirm"
+        />
+        <TaskColumn
+          title="In Progress"
+          tasks={inProgress}
+          onMove={(id) => handleMoveTask("inProgress", id)}
+          buttonLabel="Complete"
         />
         <TaskColumn
           title="Completed Tasks"

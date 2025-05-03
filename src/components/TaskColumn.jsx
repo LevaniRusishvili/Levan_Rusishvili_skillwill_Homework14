@@ -14,8 +14,9 @@ const TaskColumn = ({
   return (
     <div className="column">
       <h2 className={`heading ${isDone ? "heading-done" : "heading-todo"}`}>
-        {title}
+        {title} | {tasks.length}
       </h2>
+
       <ul className="task-list">
         {tasks.map((task) => (
           <TaskItem
